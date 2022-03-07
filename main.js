@@ -3,12 +3,18 @@ ctx = canvas.getContext('2d')
 canvas.height = 800
 canvas.width = 800
 
+let reqID
 let pointNum = 10
 let interval = canvas.height / (pointNum - 1)
 let points = []
 let camX = 0
 
-function setup(){
+function init(){
+    cancelAnimationFrame(reqID)
+    pointNum = 10
+    points = []
+    camX = 0
+    interval = canvas.height / (pointNum - 1)
     for(let i=0; i<pointNum*2; ++i){
         points.push(rand(1, 799))
     }
@@ -42,12 +48,12 @@ function loop(){
     }
 
     camX+=5
-    requestAnimationFrame(loop)
+    reqID = requestAnimationFrame(loop)
 }
 
 function main(){
-    setup()
-    requestAnimationFrame(loop)
+    init()
+    reqID = requestAnimationFrame(loop)
 }
 
 main()
